@@ -1,4 +1,4 @@
-export function fetchImages(userInput) {
+export function fetchImages(userInput, page) {
     
   const params = new URLSearchParams({
     
@@ -7,7 +7,8 @@ export function fetchImages(userInput) {
     image_type: "photo",
     orientation: "horizontal",
     safesearch: "true",
-    per_page: "40"
+    per_page: "40",
+    page: page
 
   });
 
