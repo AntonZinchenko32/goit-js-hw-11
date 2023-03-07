@@ -3,10 +3,12 @@ export function fetchImages(userInput) {
   const params = new URLSearchParams({
     
     key: "34183438-5ac415132938cde4893c052fd",
-    q: `${userInput}`,
+    q: userInput,
     image_type: "photo",
     orientation: "horizontal",
-    safesearch: "true"
+    safesearch: "true",
+    per_page: "40"
+
   });
 
   return fetch(`https://pixabay.com/api/?${params}`).then(
