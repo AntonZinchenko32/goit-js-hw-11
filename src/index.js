@@ -4,7 +4,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchImages } from './fetchImages';
 
-
+console.log("test");
 
 const form = document.querySelector(".search-form");
 const cardSet = document.querySelector(".gallery");
@@ -32,8 +32,6 @@ function handleSubmit(event) {
 
 function renderImages(images) {
     let markup;
-
-    console.log(images);
 
     if (images.length != 0) {
         cardSet.innerHTML = "";
