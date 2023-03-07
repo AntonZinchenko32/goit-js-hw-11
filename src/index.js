@@ -4,7 +4,6 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchImages } from './fetchImages';
 
-console.log("test999898");
 
 const form = document.querySelector(".search-form");
 const cardSet = document.querySelector(".gallery");
@@ -12,7 +11,6 @@ const cardSet = document.querySelector(".gallery");
 form.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
-    console.log("test123999");
   event.preventDefault();
   
     const {
