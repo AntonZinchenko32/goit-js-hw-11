@@ -1,6 +1,4 @@
 export function fetchImages(userInput) {
-
-    console.log(userInput);
     
   const params = new URLSearchParams({
     
