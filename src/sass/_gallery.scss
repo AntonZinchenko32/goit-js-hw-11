@@ -2,10 +2,49 @@
     display: flex;
     justify-content: center;
 
+    margin-bottom: 15px;
     padding: 10px;
 
     background-color: aqua;
 }
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+.link {
+    color: currentColor;
+    text-decoration: none;
+}
+
+.photo-card {
+    max-width: 420px;
+    // height: 340px;
+    flex-basis: calc(100% / 4 - 15px);
+    margin-top: 15px;
+    margin-left: 15px;
+
+    background-color:lightgray;
+
+    outline: 2px red solid;
+}
+
+.image {
+    width: 100%;
+}
+
+.info {
+    display: flex;
+}
+
+.info-item {
+    text-align: center;
+}
+
 
 .load-more {
     visibility: hidden;
