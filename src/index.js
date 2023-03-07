@@ -4,7 +4,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchImages } from './fetchImages';
 
-console.log("test");
+console.log("test999898");
 
 const form = document.querySelector(".search-form");
 const cardSet = document.querySelector(".gallery");
