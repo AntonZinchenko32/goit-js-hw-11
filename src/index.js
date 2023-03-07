@@ -4,12 +4,15 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchImages } from './fetchImages';
 
+
+
 const form = document.querySelector(".search-form");
 const cardSet = document.querySelector(".gallery");
 
 form.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
+    console.log("test123999");
   event.preventDefault();
   
     const {
@@ -41,16 +44,20 @@ function renderImages(images) {
                     <img class="image" src=${webformatURL} alt=${tags} loading="lazy" />
                     <div class="info">
                         <p class="info-item">
-                            <b>Likes: ${likes}</b>
+                            <b>Likes</b>
+                            <span class="info-value">${likes}</span>
                         </p>
                         <p class="info-item">
-                            <b>Views: ${views}</b>
+                            <b>Views</b>
+                            <span class="info-value">${views}</span>
                         </p>
                         <p class="info-item">
-                            <b>Comments: ${comments}</b>
+                            <b>Comments</b>
+                            <span class="info-value">${comments}</span>
                         </p>
                         <p class="info-item">
-                            <b>Downloads: ${downloads}</b>
+                            <b>Downloads</b>
+                            <span class="info-value">${downloads}</span>
                         </p>
                     </div>
                 </div>
