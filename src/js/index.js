@@ -20,7 +20,7 @@ let savedSearchQuery;
 let totalImgCounter;
 let displayedImgCounter;
 
-
+console.log("testing12345");
 
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", loadMore)
