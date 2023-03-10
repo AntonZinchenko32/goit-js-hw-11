@@ -22,7 +22,7 @@ let displayedImgCounter;
 
 console.log("testing9999");
 console.log("testinыаыванег123999999999994");
-console.log("hello world");
+console.log("hello worl654654654d");
 
 
 form.addEventListener("submit", handleSubmit);
