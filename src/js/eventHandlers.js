@@ -25,6 +25,8 @@ let displayedImgCounter;
 export function handleSubmit(event) {
     
     event.preventDefault();
+
+    if (page != 1) page = 1;
     
     const { elements: { searchQuery } } = event.currentTarget;
   
