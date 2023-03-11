@@ -16,7 +16,7 @@ let page = 1;
 
 let savedSearchQuery;
 
-let totalImgAmount;
+let totalImgFound;
 
 let displayedImgCounter;
 
@@ -35,18 +35,13 @@ export function handleSubmit(event) {
             .then((searchResults) => {
             
                 if (searchResults.hits.length != 0) {
+                    totalImgFound = searchResults.totalHits;
       
                     cardSet.innerHTML = renderImages(searchResults.hits);
                     simpleLightbox = new SimpleLightbox('.gallery a');
 
-                    console.log("initial page counter", page);
-                
                     displayedImgCounter = searchResults.hits.length;
-                    totalImgAmount = searchResults.totalHits;
-                
-                    console.log("page=", page);
-                    console.log("displayed", displayedImgCounter);
-                    console.log("limit", totalImgAmount);
+                    
                 }
                 else Notify.info('Sorry, there are no images matching your search query. Please try again.');
             })
@@ -57,7 +52,7 @@ export function handleSubmit(event) {
 
 export function loadMore() {
 
-    if (displayedImgCounter < totalImgAmount) {
+    if (displayedImgCounter < totalImgFound) {
 
         page++;
 
@@ -65,12 +60,11 @@ export function loadMore() {
         .then((searchResults) => {
 
             cardSet.insertAdjacentHTML("beforeend", renderImages(searchResults.hits));
+            
             simpleLightbox.refresh();
+            
             displayedImgCounter += searchResults.hits.length;
 
-            console.log("page=", page);
-            console.log("displayed", displayedImgCounter);
-            console.log("limit", totalImgAmount);
         })
         .catch((error) => console.log(error));
     }
