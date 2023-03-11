@@ -1,5 +1,5 @@
 
-export function renderImages(images) {
+export function createMarkup(images) {
 
         const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
         

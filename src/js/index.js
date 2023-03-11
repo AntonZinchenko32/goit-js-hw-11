@@ -1,4 +1,4 @@
-import { handleSubmit } from './eventHandlers';
+import { handleClick, handleSubmit } from './eventHandlers';
 import { loadMore } from './eventHandlers';
 
 
@@ -7,7 +7,7 @@ const loadMoreBtn = document.querySelector(".load-more");
 
 
 form.addEventListener("submit", handleSubmit);
-loadMoreBtn.addEventListener("click", loadMore);
+loadMoreBtn.addEventListener("click", handleClick);
 
 
 

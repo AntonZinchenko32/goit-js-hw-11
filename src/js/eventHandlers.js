@@ -4,7 +4,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { fetchImages } from './fetchImages';
-import { renderImages } from './renderImages';
+import { createMarkup } from './createMarkup';
 
 
 const cardSet = document.querySelector(".gallery");
@@ -23,6 +23,7 @@ let displayedImgCounter;
 
 
 export function handleSubmit(event) {
+    
     event.preventDefault();
     
     const { elements: { searchQuery } } = event.currentTarget;
@@ -37,7 +38,7 @@ export function handleSubmit(event) {
                 if (searchResults.hits.length != 0) {
                     totalImgFound = searchResults.totalHits;
       
-                    cardSet.innerHTML = renderImages(searchResults.hits);
+                    cardSet.innerHTML = createMarkup(searchResults.hits);
                     simpleLightbox = new SimpleLightbox('.gallery a');
 
                     displayedImgCounter = searchResults.hits.length;
@@ -50,7 +51,7 @@ export function handleSubmit(event) {
 }
 
 
-export function loadMore() {
+export function handleClick() {
 
     if (displayedImgCounter < totalImgFound) {
 
@@ -59,8 +60,7 @@ export function loadMore() {
         fetchImages(savedSearchQuery, page)
         .then((searchResults) => {
 
-            cardSet.insertAdjacentHTML("beforeend", renderImages(searchResults.hits));
-            
+            cardSet.insertAdjacentHTML("beforeend", createMarkup(searchResults.hits));
             simpleLightbox.refresh();
             
             displayedImgCounter += searchResults.hits.length;
