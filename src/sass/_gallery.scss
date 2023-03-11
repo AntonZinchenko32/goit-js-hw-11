@@ -25,6 +25,9 @@
     flex-direction: column;
     
     height: 100%;
+
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
     
     background-color:lightgray;
     box-shadow: 
@@ -64,7 +67,22 @@
     border: none;
     border-radius: 20px;
 
-    background-color: cadetblue;
-
+    background-color: darkseagreen;
+    
     cursor: pointer;
+
+    font-weight: 700;
+    letter-spacing: 0.6;
+
+    &:hover {
+        scale: 1.007;
+        background-color:rgb(105, 159, 105);
+        box-shadow:
+            0px 1px 10px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    }
+        transition-property: scale, background-color, box-shadow;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
