@@ -12,7 +12,7 @@ export async function fetchImages(userInput, page) {
 
   });
 
-  const results = await fetch(`https://pixa23bay.com/api/?${params}`);
+  const results = await fetch(`https://pixabay.com/api/?${params}`);
   const hits = await results.json();
 
   return hits;
