@@ -36,25 +36,25 @@ export function handleSubmit(event) {
     
     if (searchQuery.value != "") {
         fetchImages(searchQuery.value, page)
-        .then((searchResults) => {
+            .then((searchResults) => {
             
-            if (searchResults.hits.length != 0) {
+                if (searchResults.hits.length != 0) {
 
-                savedSearchQuery = searchQuery.value;
+                    savedSearchQuery = searchQuery.value;
                     
-                totalImgFound = searchResults.totalHits;
-                Notify.info(`Hooray! We found ${totalImgFound} images.`);
+                    totalImgFound = searchResults.totalHits;
+                    Notify.info(`Hooray! We found ${totalImgFound} images.`);
       
-                cardSet.innerHTML = createMarkup(searchResults.hits);
-                simpleLightbox = new SimpleLightbox('.gallery a');
+                    cardSet.innerHTML = createMarkup(searchResults.hits);
+                    simpleLightbox = new SimpleLightbox('.gallery a');
 
-                displayedImgCounter = searchResults.hits.length;
+                    displayedImgCounter = searchResults.hits.length;
                     
-                loadMoreBtn.style.display = "block";
-            }
-            else Notify.info('Sorry, there are no images matching your search query. Please try again.');
-        })
-        .catch((error) => console.log(error));
+                    loadMoreBtn.style.display = "block";
+                }
+                else Notify.info('Sorry, there are no images matching your search query. Please try again.');
+            })
+            .catch((error) => console.log(error));
     }
     event.currentTarget.reset();
 }
