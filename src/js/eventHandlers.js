@@ -30,12 +30,9 @@ export function handleSubmit(event) {
 
     if (page != 1) page = 1;
     
-    
     const { elements: { searchQuery } } = event.currentTarget;
   
-
     loadMoreBtn.style.display = "none";
-    
     
     if (searchQuery.value != "") {
         fetchImages(searchQuery.value, page)
@@ -59,7 +56,6 @@ export function handleSubmit(event) {
         })
         .catch((error) => console.log(error));
     }
-    
     event.currentTarget.reset();
 }
 

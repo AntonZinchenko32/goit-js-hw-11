@@ -1,6 +1,6 @@
-export function fetchImages(userInput, page) {
+export async function fetchImages(userInput, page) {
     
-  const params = new URLSearchParams({
+  const params =  new URLSearchParams({
     
     key: "34183438-5ac415132938cde4893c052fd",
     q: userInput,
@@ -12,12 +12,10 @@ export function fetchImages(userInput, page) {
 
   });
 
-  return fetch(`https://pixabay.com/api/?${params}`).then(
-    (response) => {
-      if (!response.ok) {
-          throw new Error(response.status);
-      }
-      return response.json();
-    }
-  );
+  const response = await fetch(`https://pixabay.com/api/?${params}`)
+    .then((response) => { if (!response.ok) throw new Error(response.status); });
+  
+  const hits = await response.json();
+  
+  return hits;
 }
