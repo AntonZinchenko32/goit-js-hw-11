@@ -20,7 +20,6 @@ form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
 
-
 // Функції
 
 function handleSubmit(event) {
@@ -87,16 +86,6 @@ const render = (searchResults) => {
                     
         // Поява кнопки "Load More"
         loadMoreBtn.style.display = "block";
-
-        // // Скролиінг
-        // const { height: cardHeight } = document
-        // .querySelector(".gallery a")
-        // .firstElementChild.getBoundingClientRect();
-
-        // window.scrollBy({
-        //     top: cardHeight * 10,
-        //     behavior: "smooth",
-        // })
     }
     else Notify.info('Sorry, there are no images matching your search query. Please try again.');
 }
