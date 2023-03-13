@@ -44,12 +44,18 @@
 .info {
     display: flex;
     justify-content: space-evenly;
+
+    margin: 0 10px;
 }
 
 .info-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &:not(:last-child) {
+            margin-right: 15px;
+        }
 }
 
 .info-value {

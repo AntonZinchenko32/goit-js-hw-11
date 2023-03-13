@@ -41,38 +41,11 @@ function handleSubmit(event) {
         savedSearchQuery = searchQuery.value;
 
         fetchImages(searchQuery.value, page)
-            .then((searchResults) => {
-            
-                if (searchResults.hits.length != 0) {
-                    
-                    // Сповіщення і збереження кількості отриманих результатів
-                    totalImgFound = searchResults.totalHits;
-                    Notify.info(`Hooray! We found ${totalImgFound} images.`);
-
-                    // Створення розмітки, та галереї SimpleLightbox
-                    cardSet.innerHTML = createMarkup(searchResults.hits);
-                    simpleLightbox = new SimpleLightbox('.gallery a');
-
-                    // Скролиінг
-                    const { height: cardHeight } = document
-                    .querySelector(".gallery")
-                    .firstElementChild.getBoundingClientRect();
-
-                    window.scrollBy({
-                        top: cardHeight * 2,
-                        behavior: "smooth",
-                    });
-                    
-                    // Підрахунок зображень, що вже відобразились на сторінці
-                    displayedImgCounter = searchResults.hits.length;
-                    
-                    // Поява кнопки "Load More"
-                    loadMoreBtn.style.display = "block";
-                }
-                else Notify.info('Sorry, there are no images matching your search query. Please try again.');
-            })
+            .then(render)
             .catch((error) => console.log(error));
     }
+
+    // Видаляємо введені дані з форми
     event.currentTarget.reset();
 }
 
@@ -97,6 +70,35 @@ function handleClick() {
     else Notify.info("We're sorry, but you've reached the end of search results.");
 }
 
+const render = (searchResults) => {
+    
+    if (searchResults.hits.length != 0) {
 
+        // Створення розмітки, та галереї SimpleLightbox
+        cardSet.innerHTML = createMarkup(searchResults.hits);
+        simpleLightbox = new SimpleLightbox('.gallery a');
+                    
+        // Сповіщення і збереження кількості отриманих результатів
+        totalImgFound = searchResults.totalHits;
+        Notify.info(`Hooray! We found ${totalImgFound} images.`);
+            
+        // Підрахунок зображень, що вже відобразились на сторінці
+        displayedImgCounter = searchResults.hits.length;
+                    
+        // Поява кнопки "Load More"
+        loadMoreBtn.style.display = "block";
+
+        // // Скролиінг
+        // const { height: cardHeight } = document
+        // .querySelector(".gallery a")
+        // .firstElementChild.getBoundingClientRect();
+
+        // window.scrollBy({
+        //     top: cardHeight * 10,
+        //     behavior: "smooth",
+        // })
+    }
+    else Notify.info('Sorry, there are no images matching your search query. Please try again.');
+}
 
 
