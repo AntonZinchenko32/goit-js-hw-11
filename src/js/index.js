@@ -19,6 +19,7 @@ let displayedImgCounter;
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
+// Перевірка роботи сервера
 console.log("te123s99t");
 
 // Функції
@@ -72,9 +73,11 @@ function render(searchResults) {
         // Ведемо підрахунок зображень, що вже відобразились на сторінці
         displayedImgCounter = searchResults.hits.length;
 
-        console.log(displayedImgCounter);
-        console.log(totalImgFound);
-        console.log(savedSearchQuery);
+        // Перевірка
+        console.log("displayed: ",displayedImgCounter);
+        console.log("total: ",totalImgFound);
+        console.log("savedQuery: ", savedSearchQuery);
+        console.log("Page number: ",page);
 
         // Перевіряємо чи не скінчились зображення для завантаження, якщо ні - відображаємо кнопку "Load More"
         if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
@@ -109,9 +112,11 @@ function renderMore(searchResults) {
         // Ведемо підрахунок відображених зображень
         displayedImgCounter += searchResults.hits.length;
 
-        console.log(displayedImgCounter);
-        console.log(totalImgFound);
-        console.log(savedSearchQuery);
+        // Перевірка
+        console.log("displayed: ",displayedImgCounter);
+        console.log("total: ",totalImgFound);
+        console.log("savedQuery: ", savedSearchQuery);
+        console.log("Page number: ",page);
 
         // Перевіряємо чи не скінчились зображення для завантаження, якщо так - ховаємо кнопку "Load More" і сповіщаємо про це користувача
         if (displayedImgCounter >= totalImgFound) {
