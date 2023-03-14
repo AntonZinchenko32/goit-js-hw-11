@@ -20,8 +20,6 @@ let displayedImgCounter;
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
-// Перевірка роботи лайв-сервера
-console.log("te123s99t");
 
 // Функції
 
@@ -74,12 +72,6 @@ function render(searchResults) {
         // Ведемо підрахунок зображень, що вже відобразились на сторінці
         displayedImgCounter = searchResults.hits.length;
 
-        // Перевірка
-        console.log("displayed: ",displayedImgCounter);
-        console.log("total: ",totalImgFound);
-        console.log("savedQuery: ", savedSearchQuery);
-        console.log("Page number: ",page);
-
         // Перевіряємо чи не скінчились зображення для завантаження, якщо ні - відображаємо кнопку "Load More"
         if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
     }
@@ -115,13 +107,9 @@ function renderMore(searchResults) {
         // Ведемо підрахунок відображених зображень
         displayedImgCounter += searchResults.hits.length;
 
-        // Перевірка
-        console.log("displayed: ",displayedImgCounter);
-        console.log("savedQuery: ", savedSearchQuery);
-        console.log("Page number: ",page);
-
         // Перевіряємо чи не скінчились зображення для завантаження, якщо так - ховаємо кнопку "Load More" і сповіщаємо про це користувача
         if (displayedImgCounter >= totalImgFound) {
+            
             loadMoreBtn.style.display = "none";
             Notify.info("We're sorry, but you've reached the end of search results.");
         }
