@@ -70,10 +70,17 @@ const render = (searchResults) => {
         // Ведемо підрахунок зображень, що вже відобразились на сторінці
         displayedImgCounter = searchResults.hits.length;
 
+        console.log(displayedImgCounter);
+        console.log(totalImgFound);
+
         // Перевіряємо чи не скінчились зображення для завантаження, якщо ні - відображаємо кнопку "Load More"
         if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
     }
-    else Notify.info('Sorry, there are no images matching your search query. Please try again.');
+    else {
+        Notify.info('Sorry, there are no images matching your search query. Please try again.');
+        cardSet.innerHTML = "";
+        loadMoreBtn.style.display = "none";
+    }
 }
 
 
@@ -92,6 +99,9 @@ function handleClick() {
         
         // Ведемо підрахунок відображених зображень
         displayedImgCounter += searchResults.hits.length;
+
+        console.log(displayedImgCounter);
+        console.log(totalImgFound);
 
         // Перевіряємо чи не скінчились зображення для завантаження, якщо так - ховаємо кнопку "Load More" і сповіщаємо про це користувача
         if (displayedImgCounter >= totalImgFound) {
