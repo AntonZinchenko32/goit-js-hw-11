@@ -15,7 +15,7 @@ let savedSearchQuery;
 let totalImgFound;
 let displayedImgCounter;
 
-console.log("test12");
+console.log("test1299");
 
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
