@@ -47,8 +47,8 @@ async function handleSubmit(event) {
         // Зберігаємо значення пошукового запиту
         savedSearchQuery = trimmedSearchQuery;
 
-        // Видаляємо введені дані з форми
-            event.currentTarget.reset();
+        // Очищуємо поле форми
+        event.currentTarget.reset();
 
         // Робимо забит до бекенду та рендер зображень
         try {
@@ -99,10 +99,11 @@ async function handleClick() {
     try {
         const recivedImg = await fetchImages(savedSearchQuery, page);
         renderMore(recivedImg);
-        autoScrolling();
-
+        
     } catch (error) { console.log(error.message) }
     
+    // Запускаємо автопрокручування сторінки
+    autoScrolling();
 }
 
 function renderMore(searchResults) {
