@@ -15,11 +15,11 @@ let savedSearchQuery;
 let totalImgFound;
 let displayedImgCounter;
 
-console.log("test1anton1239999945");
 
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
+console.log("test");
 
 // Функції
 
@@ -30,17 +30,21 @@ function handleSubmit(event) {
     
     // Деструктуризуємо об'єкт події сабміту, та дістаємо значення пошукового запиту
     const { elements: { searchQuery } } = event.currentTarget;
+    
+    // Прибираємо зайві пробіли на початку і в кінці рядку, якщо воини є
+    const trimmedSearchQuery = searchQuery.value.trim();
   
     // Ховаємо кнопку "Load More"
     loadMoreBtn.style.display = "none";
     
     // Перевіряємо чи значення пушокового запиту не пустий рядок
-    if (searchQuery.value != "") {
+    if (trimmedSearchQuery) {
         
         // Зберігаємо значення пошукового запиту
-        savedSearchQuery = searchQuery.value;
+        savedSearchQuery = trimmedSearchQuery;
 
-        fetchImages(searchQuery.value, page)
+        // Робимо забит до бекенду
+        fetchImages(trimmedSearchQuery, page)
             .then(render)
             .catch((error) => console.log(error));
     }
