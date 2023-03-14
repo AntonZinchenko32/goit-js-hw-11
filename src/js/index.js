@@ -38,7 +38,6 @@ function handleSubmit(event) {
     const trimmedSearchQuery = searchQuery.value.trim();
   
     
-    
     // Перевіряємо чи значення пушокового запиту не пустий рядок
     if (trimmedSearchQuery) {
         
@@ -55,7 +54,7 @@ function handleSubmit(event) {
     event.currentTarget.reset();
 }
 
-const render = (searchResults) => {
+function render(searchResults) {
     
     if (searchResults.hits.length != 0) {
 
@@ -72,6 +71,7 @@ const render = (searchResults) => {
 
         console.log(displayedImgCounter);
         console.log(totalImgFound);
+        console.log(savedSearchQuery);
 
         // Перевіряємо чи не скінчились зображення для завантаження, якщо ні - відображаємо кнопку "Load More"
         if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
@@ -83,7 +83,6 @@ const render = (searchResults) => {
     }
 }
 
-
 function handleClick() {
 
     // Оновлюємо сторінку запиту до бекенду
@@ -91,7 +90,11 @@ function handleClick() {
 
     // Робимо повторний запит до бекенду
     fetchImages(savedSearchQuery, page)
-    .then((searchResults) => {
+    .then(loadMore)
+    .catch((error) => console.log(error));
+}
+
+function loadMore(searchResults) {
 
         // Рендеримо нові знайдені зображення
         cardSet.insertAdjacentHTML("beforeend", createMarkup(searchResults.hits));
@@ -102,16 +105,13 @@ function handleClick() {
 
         console.log(displayedImgCounter);
         console.log(totalImgFound);
+        console.log(savedSearchQuery);
 
         // Перевіряємо чи не скінчились зображення для завантаження, якщо так - ховаємо кнопку "Load More" і сповіщаємо про це користувача
         if (displayedImgCounter >= totalImgFound) {
             loadMoreBtn.style.display = "none";
             Notify.info("We're sorry, but you've reached the end of search results.");
         }
-    })
-    .catch((error) => console.log(error));
-}
-
-
+    }
 
 
