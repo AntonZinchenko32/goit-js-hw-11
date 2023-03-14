@@ -20,7 +20,7 @@ let displayedImgCounter;
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
-// Перевірка роботи сервера
+// Перевірка роботи лайв-сервера
 console.log("te123s99t");
 
 // Функції
@@ -116,7 +116,6 @@ function renderMore(searchResults) {
 
         // Перевірка
         console.log("displayed: ",displayedImgCounter);
-        console.log("total: ",totalImgFound);
         console.log("savedQuery: ", savedSearchQuery);
         console.log("Page number: ",page);
 
