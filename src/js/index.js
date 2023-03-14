@@ -4,6 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { fetchImages } from './fetchImages';
 import { createMarkup } from './createMarkup';
+import { autoScrolling } from "./auto-scrolling";
 
 const form = document.querySelector(".search-form");
 const loadMoreBtn = document.querySelector(".load-more");
@@ -67,7 +68,7 @@ function render(searchResults) {
         simpleLightbox = new SimpleLightbox('.gallery a');
                     
         // Сповіщюємо користувача про кількість знайденних зображень, та зберігаємо ці данні у змінну 
-        Notify.info(`Hooray! We found ${searchResults.totalHits} images.`);
+        Notify.success(`Hooray! We found ${searchResults.totalHits} images.`);
         totalImgFound = searchResults.totalHits;
             
         // Ведемо підрахунок зображень, що вже відобразились на сторінці
@@ -83,7 +84,7 @@ function render(searchResults) {
         if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
     }
     else {
-        Notify.info('Sorry, there are no images matching your search query. Please try again.');
+        Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         cardSet.innerHTML = "";
         loadMoreBtn.style.display = "none";
     }
@@ -98,6 +99,7 @@ async function handleClick() {
     try {
         const recivedImg = await fetchImages(savedSearchQuery, page);
         renderMore(recivedImg);
+        autoScrolling();
 
     } catch (error) { console.log(error.message) }
     
@@ -124,5 +126,7 @@ function renderMore(searchResults) {
             Notify.info("We're sorry, but you've reached the end of search results.");
         }
     }
+
+
 
 
