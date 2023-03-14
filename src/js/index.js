@@ -19,14 +19,17 @@ let displayedImgCounter;
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
-console.log("test");
 
 // Функції
 
 function handleSubmit(event) {
     event.preventDefault();
 
-    if (page != 1) page = 1;
+    // У разі нового пошуку - оновлюємо сторінку запиту та ховаємо кнопку "Load more"
+    if (page != 1) {
+        page = 1;
+        loadMoreBtn.style.display = "none";
+    }
     
     // Деструктуризуємо об'єкт події сабміту, та дістаємо значення пошукового запиту
     const { elements: { searchQuery } } = event.currentTarget;
@@ -34,8 +37,7 @@ function handleSubmit(event) {
     // Прибираємо зайві пробіли на початку і в кінці рядку, якщо воини є
     const trimmedSearchQuery = searchQuery.value.trim();
   
-    // Ховаємо кнопку "Load More"
-    loadMoreBtn.style.display = "none";
+    
     
     // Перевіряємо чи значення пушокового запиту не пустий рядок
     if (trimmedSearchQuery) {
@@ -53,46 +55,53 @@ function handleSubmit(event) {
     event.currentTarget.reset();
 }
 
-
-function handleClick() {
-
-    if (displayedImgCounter < totalImgFound) {
-
-        page++;
-
-        fetchImages(savedSearchQuery, page)
-        .then((searchResults) => {
-
-            cardSet.insertAdjacentHTML("beforeend", createMarkup(searchResults.hits));
-            simpleLightbox.refresh();
-            
-            displayedImgCounter += searchResults.hits.length;
-        
-        })
-        .catch((error) => console.log(error));
-    }
-    else Notify.info("We're sorry, but you've reached the end of search results.");
-}
-
 const render = (searchResults) => {
     
     if (searchResults.hits.length != 0) {
 
-        // Створення розмітки, та галереї SimpleLightbox
+        // Рендеримо знайдені зображення
         cardSet.innerHTML = createMarkup(searchResults.hits);
         simpleLightbox = new SimpleLightbox('.gallery a');
                     
-        // Сповіщення і збереження кількості отриманих результатів
+        // Сповіщюємо користувача про кількість знайденних зображень, та зберігаємо ці данні у змінну 
+        Notify.info(`Hooray! We found ${searchResults.totalHits} images.`);
         totalImgFound = searchResults.totalHits;
-        Notify.info(`Hooray! We found ${totalImgFound} images.`);
             
-        // Підрахунок зображень, що вже відобразились на сторінці
+        // Ведемо підрахунок зображень, що вже відобразились на сторінці
         displayedImgCounter = searchResults.hits.length;
-                    
-        // Поява кнопки "Load More"
-        loadMoreBtn.style.display = "block";
+
+        // Перевіряємо чи не скінчились зображення для завантаження, якщо ні - відображаємо кнопку "Load More"
+        if (displayedImgCounter < totalImgFound) loadMoreBtn.style.display = "block";
     }
     else Notify.info('Sorry, there are no images matching your search query. Please try again.');
 }
+
+
+function handleClick() {
+
+    // Оновлюємо сторінку запиту до бекенду
+    page++;
+
+    // Робимо повторний запит до бекенду
+    fetchImages(savedSearchQuery, page)
+    .then((searchResults) => {
+
+        // Рендеримо нові знайдені зображення
+        cardSet.insertAdjacentHTML("beforeend", createMarkup(searchResults.hits));
+        simpleLightbox.refresh();
+        
+        // Ведемо підрахунок відображених зображень
+        displayedImgCounter += searchResults.hits.length;
+
+        // Перевіряємо чи не скінчились зображення для завантаження, якщо так - ховаємо кнопку "Load More" і сповіщаємо про це користувача
+        if (displayedImgCounter >= totalImgFound) {
+            loadMoreBtn.style.display = "none";
+            Notify.info("We're sorry, but you've reached the end of search results.");
+        }
+    })
+    .catch((error) => console.log(error));
+}
+
+
 
 
