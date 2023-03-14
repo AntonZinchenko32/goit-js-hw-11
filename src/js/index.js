@@ -19,12 +19,13 @@ let displayedImgCounter;
 form.addEventListener("submit", handleSubmit);
 loadMoreBtn.addEventListener("click", handleClick);
 
+console.log("te123s99t");
 
 // Функції
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
-
+    
     // У разі нового пошуку - оновлюємо сторінку запиту та ховаємо кнопку "Load more"
     if (page != 1) {
         page = 1;
@@ -44,14 +45,16 @@ function handleSubmit(event) {
         // Зберігаємо значення пошукового запиту
         savedSearchQuery = trimmedSearchQuery;
 
-        // Робимо забит до бекенду
-        fetchImages(trimmedSearchQuery, page)
-            .then(render)
-            .catch((error) => console.log(error));
-    }
+        // Видаляємо введені дані з форми
+            event.currentTarget.reset();
 
-    // Видаляємо введені дані з форми
-    event.currentTarget.reset();
+        // Робимо забит до бекенду та рендер зображень
+        try {
+            const recivedImg = await fetchImages(trimmedSearchQuery, page);
+            render(recivedImg);
+
+        } catch (error) { console.log(error.message) }
+    }
 }
 
 function render(searchResults) {
@@ -83,18 +86,21 @@ function render(searchResults) {
     }
 }
 
-function handleClick() {
+async function handleClick() {
 
     // Оновлюємо сторінку запиту до бекенду
     page++;
 
-    // Робимо повторний запит до бекенду
-    fetchImages(savedSearchQuery, page)
-    .then(loadMore)
-    .catch((error) => console.log(error));
+    // Робимо повторний запит до бекенду та рендер нових зображень
+    try {
+        const recivedImg = await fetchImages(savedSearchQuery, page);
+        renderMore(recivedImg);
+
+    } catch (error) { console.log(error.message) }
+    
 }
 
-function loadMore(searchResults) {
+function renderMore(searchResults) {
 
         // Рендеримо нові знайдені зображення
         cardSet.insertAdjacentHTML("beforeend", createMarkup(searchResults.hits));
